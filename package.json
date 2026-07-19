@@ -1,0 +1,20 @@
+{
+  "name": "arcpay",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "register-entity-secret": "tsx --env-file=.env scripts/register-entity-secret.ts",
+    "create-wallets": "tsx --env-file=.env scripts/create-wallets.ts",
+    "check-balance": "tsx --env-file=.env scripts/check-balance.ts",
+    "transfer": "tsx --env-file=.env scripts/transfer.ts"
+  },
+  "dependencies": {
+    "@circle-fin/developer-controlled-wallets": "^7.0.0"
+  },
+  "devDependencies": {
+    "tsx": "^4.19.0",
+    "typescript": "^5.6.0",
+    "@types/node": "^22.0.0"
+  }
+}
