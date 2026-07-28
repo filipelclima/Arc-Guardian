@@ -1,19 +1,45 @@
-# Arc Guardian
-
-Autonomous Guardian Agent that monitors USDC spending across AI agent wallets on Arc, and freezes anomalous behavior in real time - no human in the loop.
-
-## What works right now
-- Circle Developer-Controlled Wallets set up on Arc Testnet
-- Buyer and Seller agent wallets created and funded
-- Working end-to-end USDC payment between agents (scripts/transfer.ts)
-- Balance checking (scripts/check-balance.ts)
-
-## Coming next
-- SpendGate smart contract giving Guardian onchain authority to freeze an agent
-- Anomaly detection logic (spend velocity / threshold rules)
-- Demo: simulate a runaway agent, show Guardian freeze it mid-loop
-
-## Setup
-1. npm install
-2. Copy .env.example to .env and fill in your own Circle API key
-3. Run the scripts in the scripts folder in order: register-entity-secret, create-wallets, check-balance, transfer
+Add-Content README.md '# Arc Guardian'
+Add-Content README.md ''
+Add-Content README.md 'Autonomous Guardian Agent that monitors USDC spending across AI agent wallets on Arc, and freezes anomalous behavior in real time - no human in the loop. Guardian flips the usual agentic-economy demo: instead of showing an agent spending money, it shows an agent governing spend.'
+Add-Content README.md ''
+Add-Content README.md '## Structure'
+Add-Content README.md ''
+Add-Content README.md 'This repo is split into two parts on purpose:'
+Add-Content README.md ''
+Add-Content README.md '- `core/` - the reusable primitive. Framework-agnostic spend-governance logic that any agent project can fork and drop in.'
+Add-Content README.md '  - `gate.ts` - tracks which agent IDs are frozen'
+Add-Content README.md '  - `paylog.ts` - records payment history, used to detect patterns'
+Add-Content README.md '  - `guard.ts` - wraps ANY async send function with gate-checking and logging. This is the main integration point: `guarded(agentId, sendFn)` returns a gated version of your own payment function.'
+Add-Content README.md '  - `detect.ts` - generic velocity-based anomaly check: `checkVelocity(agentId, windowMs, threshold)` freezes an agent if it exceeds a payment rate you define.'
+Add-Content README.md '- `demo/` - a concrete example built on Circle Developer-Controlled Wallets and Arc Testnet, showing core/ in action with a Buyer and Seller agent.'
+Add-Content README.md ''
+Add-Content README.md '## What works right now'
+Add-Content README.md '- Circle Developer-Controlled Wallets set up on Arc Testnet'
+Add-Content README.md '- Buyer and Seller agent wallets created and funded'
+Add-Content README.md '- Working end-to-end USDC payment between agents, gated through core/guard.ts'
+Add-Content README.md '- Anomaly detection: a simulated runaway agent gets detected and frozen mid-loop, then blocked on its next attempt'
+Add-Content README.md ''
+Add-Content README.md '## Coming next'
+Add-Content README.md '- SpendGate: an onchain version of the freeze mechanism (currently local-state based) as a small Arc smart contract'
+Add-Content README.md '- Demo video and deck for final submission'
+Add-Content README.md ''
+Add-Content README.md '## Setup'
+Add-Content README.md '1. npm install'
+Add-Content README.md '2. Copy .env.example to .env and fill in your own Circle API key'
+Add-Content README.md '3. Run: npx tsx --env-file=.env demo/unfreeze.ts'
+Add-Content README.md '4. Run: npx tsx --env-file=.env demo/simulate-runaway.ts'
+Add-Content README.md '5. Run: npx tsx --env-file=.env demo/guardian-check.ts'
+Add-Content README.md '6. Run: npx tsx --env-file=.env demo/simulate-runaway.ts again - this time it gets blocked'
+Add-Content README.md ''
+Add-Content README.md '## Using core/ in your own project'
+Add-Content README.md '```'
+Add-Content README.md 'import { guarded } from "./core/guard";'
+Add-Content README.md 'import { checkVelocity } from "./core/detect";'
+Add-Content README.md ''
+Add-Content README.md 'const send = guarded("my-agent-id", async (amount) => {'
+Add-Content README.md '  // your own payment logic here'
+Add-Content README.md '});'
+Add-Content README.md ''
+Add-Content README.md '// periodically, or after each payment:'
+Add-Content README.md 'checkVelocity("my-agent-id", 60000, 5); // freeze if 5+ payments in 60s'
+Add-Content README.md '```'
