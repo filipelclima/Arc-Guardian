@@ -1,0 +1,10 @@
+[
+{"inputs":[],"stateMutability":"nonpayable","type":"constructor"},
+{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"agent","type":"address"}],"name":"Frozen","type":"event"},
+{"anonymous":false,"inputs":[{"indexed":true,"internalType":"address","name":"agent","type":"address"}],"name":"Unfrozen","type":"event"},
+{"inputs":[{"internalType":"address","name":"agent","type":"address"}],"name":"freeze","outputs":[],"stateMutability":"nonpayable","type":"function"},
+{"inputs":[{"internalType":"address","name":"","type":"address"}],"name":"frozen","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+{"inputs":[],"name":"guardian","outputs":[{"internalType":"address","name":"","type":"address"}],"stateMutability":"view","type":"function"},
+{"inputs":[{"internalType":"address","name":"agent","type":"address"}],"name":"isFrozen","outputs":[{"internalType":"bool","name":"","type":"bool"}],"stateMutability":"view","type":"function"},
+{"inputs":[{"internalType":"address","name":"agent","type":"address"}],"name":"unfreeze","outputs":[],"stateMutability":"nonpayable","type":"function"}
+]
